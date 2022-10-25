@@ -3,8 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
+<!-- 실제 쿼리 작성 부분 (DAD 에서 namespace.id 로 접근한다)-->  
 <mapper namespace="user">
-	<select id="getData" resultType="hashmap">
-		SELECT * FROM TESTTABLE
+
+	<!-- 각각의 쿼리를 등록 -->
+	<insert id="save" parameterType="hashmap">
+		INSERT INTO TESTTABLE(TESTNUM, TESTDATE, TESTVARCHAR) 
+		VALUES (#{testNum}, #{testDate}, #{testVarchar})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM TESTTABLE WHERE TESTNUM = #{testNum}
+	</delete>
+	
+	<select id="getOne" resultType="hashmap" parameterType="int">
+		SELECT * FROM TESTTABLE WHERE TESTNUM = #{testNum}
 	</select>
+	
+	<select id="getAll" resultType="hashmap">
+		SELECT * FROM TESTTABLE 
+	</select>
+	
+	
+	<!-- 	
+	<update id="update" parameterType="hashmap">
+		UPDATE TESTTABLE
+		SET TESTVARCHAR = #{testVarchar}
+		WHERE TESTNUM = #{testNum}
+	</update> 
+	-->
+	
+	
 </mapper>
+
+
